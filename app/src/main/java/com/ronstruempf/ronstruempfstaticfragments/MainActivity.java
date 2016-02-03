@@ -3,13 +3,16 @@ package com.ronstruempf.ronstruempfstaticfragments;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener {
+    public static final String APP_TAG = "StaticFragmentLog";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +51,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDataEntry(double n1, double n2) {
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm == null) {
+            Log.e(MainActivity.APP_TAG, "MainActivity::onDataEntry: Error, fragment manager is null");
+            return;
+        }
+        DataDisplayFragment _display = (DataDisplayFragment)fm.findFragmentById(R.id.dataDisplayFragment);
+        _display.setFirstNumber(n1);
+        _display.setSecondNumber(n2);
+        _display.multiply();
+        _display.displayProduct();
     }
 }
