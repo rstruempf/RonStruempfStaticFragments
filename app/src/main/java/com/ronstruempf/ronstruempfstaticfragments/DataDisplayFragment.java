@@ -1,11 +1,14 @@
 package com.ronstruempf.ronstruempfstaticfragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -15,6 +18,12 @@ import android.widget.TextView;
 public class DataDisplayFragment extends Fragment {
 
     private TextView _display;
+
+    public interface AdditionListener {
+        void onAdd();
+    }
+
+    private AdditionListener _listener;
 
     public DataDisplayFragment() {
         // Required empty public constructor
@@ -32,7 +41,34 @@ public class DataDisplayFragment extends Fragment {
         View theView = inflater.inflate(R.layout.fragment_data_display, container, false);
 
         _display = (TextView)theView.findViewById(R.id.displayProduct);
+        // get a reference to the multiply button and set an onClick handler
+        Button addButton = (Button) theView.findViewById(R.id.buttonAdd);
+        addButton.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { addButtonClicked(v); } });
         return theView;
     }
 
+    /**
+     * Add button onClick handler
+     *
+     * @param view Unused
+     */
+    private void addButtonClicked(View view) {
+        if (_listener == null) {
+            return;
+        }
+        _listener.onAdd();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Note: Had to also add deprecated onAttach(Activity) in my practice code
+        Log.d(MainActivity.APP_TAG, "DataDisplayFragment: onAttach(context) called");
+        if (context instanceof AdditionListener) {
+            _listener = (AdditionListener)context;
+        }
+        else {
+            Log.e(MainActivity.APP_TAG, "DataDisplayFragment::onAttach(context): Error, context is not AdditionListener");
+        }
+    }
 }
