@@ -20,11 +20,11 @@ public class DataEntryFragment extends Fragment {
     private EditText _first;
     private EditText _second;
 
-    public interface DataEntryListener {
-        void onDataEntry(double n1, double n2);
+    public interface MultiplyListener {
+        void onMultiply(double n1, double n2);
     }
 
-    private DataEntryListener _listener;
+    private MultiplyListener _listener;
 
     public DataEntryFragment() {
         // Required empty public constructor
@@ -65,7 +65,7 @@ public class DataEntryFragment extends Fragment {
             Log.e(MainActivity.APP_TAG, "DataEntryFragment: Value parse failed");
             return;
         }
-        _listener.onDataEntry(number1, number2);
+        _listener.onMultiply(number1, number2);
     }
 
     @Override
@@ -73,11 +73,11 @@ public class DataEntryFragment extends Fragment {
         super.onAttach(context);
         // Note: Had to also add deprecated onAttach(Activity) in my practice code
         Log.d(MainActivity.APP_TAG, "DataEntryFragment: onAttach(context) called");
-        if (context instanceof DataEntryListener) {
-            _listener = (DataEntryListener)context;
+        if (context instanceof MultiplyListener) {
+            _listener = (MultiplyListener)context;
         }
         else {
-            Log.e(MainActivity.APP_TAG, "DataEntryFragment::onAttach(context): Error, context is no DataEntryListener");
+            Log.e(MainActivity.APP_TAG, "DataEntryFragment::onAttach(context): Error, context is not MultiplyListener");
         }
     }
 }

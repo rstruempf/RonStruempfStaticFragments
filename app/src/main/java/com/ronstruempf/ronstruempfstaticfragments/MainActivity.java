@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener {
+public class MainActivity extends AppCompatActivity implements DataEntryFragment.MultiplyListener {
     public static final String APP_TAG = "StaticFragmentLog";
 
     @Override
@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
     }
 
     @Override
-    public void onDataEntry(double n1, double n2) {
+    public void onMultiply(double n1, double n2) {
         FragmentManager fm = getSupportFragmentManager();
         if (fm == null) {
-            Log.e(MainActivity.APP_TAG, "MainActivity::onDataEntry: Error, fragment manager is null");
+            Log.e(MainActivity.APP_TAG, "MainActivity::onMultiply: Error, fragment manager is null");
             return;
         }
         DataDisplayFragment _display = (DataDisplayFragment)fm.findFragmentById(R.id.dataDisplayFragment);
