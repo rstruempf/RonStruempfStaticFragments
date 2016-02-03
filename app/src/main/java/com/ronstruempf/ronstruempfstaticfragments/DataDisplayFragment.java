@@ -16,27 +16,12 @@ public class DataDisplayFragment extends Fragment {
 
     private TextView _display;
 
-    private double firstNumber;
-    private double secondNumber;
-    private double product = 0;
-
     public DataDisplayFragment() {
         // Required empty public constructor
     }
 
-    public void setFirstNumber(double firstNumber) {
-        this.firstNumber = firstNumber;
-    }
-
-    public void setSecondNumber(double secondNumber) {
-        this.secondNumber = secondNumber;
-    }
-
-    public void multiply() {
-        product = firstNumber * secondNumber;
-    }
-
-    public void displayProduct() {
+    public void displayProduct(double n1, double n2) {
+        double product = n1 * n2;
         _display.setText(Double.toString(product));
     }
 

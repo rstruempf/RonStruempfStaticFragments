@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
             return;
         }
         DataDisplayFragment _display = (DataDisplayFragment)fm.findFragmentById(R.id.dataDisplayFragment);
-        _display.setFirstNumber(n1);
-        _display.setSecondNumber(n2);
-        _display.multiply();
-        _display.displayProduct();
+       _display.displayProduct(n1, n2);
     }
 }
