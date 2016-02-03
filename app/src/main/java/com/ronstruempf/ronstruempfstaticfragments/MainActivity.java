@@ -14,6 +14,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity implements DataEntryFragment.MultiplyListener {
     public static final String APP_TAG = "StaticFragmentLog";
 
+    private DataEntryFragment _dataEntryForm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
                         .setAction("Action", null).show();
             }
         });
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm == null) {
+            Log.e(MainActivity.APP_TAG, "MainActivity::onCreate: Error, fragment manager is null");
+            return;
+        }
+        _dataEntryForm = (DataEntryFragment)fm.findFragmentById(R.id.dataEntryFragment);
     }
 
     @Override
@@ -54,12 +62,14 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
     }
 
     @Override
-    public void onMultiply(double n1, double n2) {
+    public void onMultiply() {
         FragmentManager fm = getSupportFragmentManager();
         if (fm == null) {
             Log.e(MainActivity.APP_TAG, "MainActivity::onMultiply: Error, fragment manager is null");
             return;
         }
+        double n1 = _dataEntryForm.getFirstNumber();
+        double n2 = _dataEntryForm.getSecondNumber();
         DataDisplayFragment _display = (DataDisplayFragment)fm.findFragmentById(R.id.dataDisplayFragment);
        _display.displayProduct(n1, n2);
     }

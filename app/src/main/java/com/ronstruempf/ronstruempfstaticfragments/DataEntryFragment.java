@@ -21,7 +21,7 @@ public class DataEntryFragment extends Fragment {
     private EditText _second;
 
     public interface MultiplyListener {
-        void onMultiply(double n1, double n2);
+        void onMultiply();
     }
 
     private MultiplyListener _listener;
@@ -30,6 +30,25 @@ public class DataEntryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public double getFirstNumber() {
+        try {
+            return Double.parseDouble(this._first.getText().toString());
+        }
+        catch (Exception ex) {
+            Log.e(MainActivity.APP_TAG, "DataEntryFragment::getFirstNumber: Error, Value parse failed");
+            return 0;
+        }
+    }
+
+    public double getSecondNumber() {
+        try {
+            return Double.parseDouble(this._second.getText().toString());
+        }
+        catch (Exception ex) {
+            Log.e(MainActivity.APP_TAG, "DataEntryFragment::getSecondNumber: Error, Value parse failed");
+            return 0;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,17 +74,7 @@ public class DataEntryFragment extends Fragment {
         if (_listener == null) {
             return;
         }
-        double number1;
-        double number2;
-        try {
-            number1 = Double.parseDouble(this._first.getText().toString());
-            number2 = Double.parseDouble(this._second.getText().toString());
-        }
-        catch (Exception ex) {
-            Log.e(MainActivity.APP_TAG, "DataEntryFragment: Value parse failed");
-            return;
-        }
-        _listener.onMultiply(number1, number2);
+         _listener.onMultiply();
     }
 
     @Override
