@@ -35,5 +35,13 @@
             android:id="@+id/dataDisplayFragment"
             android:layout_gravity="center_horizontal"
             tools:layout="@layout/fragment_data_display" />
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.ronstruempf.ronstruempfstaticfragments.SumDisplayFragment"
+            android:id="@+id/sumDisplayFragment"
+            android:layout_gravity="center_horizontal"
+            tools:layout="@layout/fragment_sum_display" />
     </LinearLayout>
 </RelativeLayout>

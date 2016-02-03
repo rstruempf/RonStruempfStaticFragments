@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements DataEntryFragment.MultiplyListener {
+public class MainActivity extends AppCompatActivity implements DataEntryFragment.MultiplyListener, DataDisplayFragment.AdditionListener{
     public static final String APP_TAG = "StaticFragmentLog";
 
     private DataEntryFragment _dataEntryForm;
@@ -72,5 +72,18 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
         double n2 = _dataEntryForm.getSecondNumber();
         DataDisplayFragment _display = (DataDisplayFragment)fm.findFragmentById(R.id.dataDisplayFragment);
        _display.displayProduct(n1, n2);
+    }
+
+    @Override
+    public void onAdd() {
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm == null) {
+            Log.e(MainActivity.APP_TAG, "MainActivity::onAdd: Error, fragment manager is null");
+            return;
+        }
+        double n1 = _dataEntryForm.getFirstNumber();
+        double n2 = _dataEntryForm.getSecondNumber();
+        SumDisplayFragment _display = (SumDisplayFragment)fm.findFragmentById(R.id.sumDisplayFragment);
+        _display.displaySum(n1, n2);
     }
 }

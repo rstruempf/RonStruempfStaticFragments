@@ -29,11 +29,6 @@ public class DataDisplayFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public void displayProduct(double n1, double n2) {
-        double product = n1 * n2;
-        _display.setText(Double.toString(product));
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +40,17 @@ public class DataDisplayFragment extends Fragment {
         Button addButton = (Button) theView.findViewById(R.id.buttonAdd);
         addButton.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { addButtonClicked(v); } });
         return theView;
+    }
+
+    /**
+     * Display the product of two values in the TextView
+     *
+     * @param n1 First number
+     * @param n2 Second number
+     */
+    public void displayProduct(double n1, double n2) {
+        double product = n1 * n2;
+        _display.setText(Double.toString(product));
     }
 
     /**
